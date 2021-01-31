@@ -15,6 +15,17 @@ let Lambda = class Lambda {
         this._params = params;
         return this;
     }
+    timeout(timeout) {
+        this._timeout = timeout;
+        return this;
+    }
+    toJSON() {
+        return {
+            lambda: this._lambda,
+            params: Object.assign({}, this._params),
+            timeout: this._timeout
+        };
+    }
     run() {
         return this.lambdaProvider.run({ lambda: this._lambda, params: this._params });
     }

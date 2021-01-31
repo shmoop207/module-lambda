@@ -4,6 +4,7 @@ import {ILambdaResult, IOptions, LambdaError} from "../../index";
 import {LambdaClient, InvokeCommand, InvokeCommandOutput} from "@aws-sdk/client-lambda"
 import {Lambda} from "./lambda";
 import {ILambdaErrorParams} from "./errors/lambdaError";
+import {ILambdaOptions} from "./interfaces/IOptions";
 
 @define()
 @singleton()
@@ -38,7 +39,7 @@ export class LambdaProvider {
         return this.createLambdaFn() as Lambda<T, K>;
     }
 
-    public async runAsync<T extends { [index: string]: any }>(options: { lambda?: string, params: T }): Promise<{ status: number, requestId: string }> {
+    public async runAsync<T>(options: ILambdaOptions<T>): Promise<{ status: number, requestId: string }> {
 
         let lambda = options.lambda || this.moduleOptions.defaultLambda;
 
@@ -58,7 +59,7 @@ export class LambdaProvider {
         }
     }
 
-    public async run<K, T extends { [index: string]: any }>(options: { lambda?: string, params: T }): Promise<K> {
+    public async run<K, T>(options: ILambdaOptions<T>): Promise<K> {
 
         let lambda = options.lambda || this.moduleOptions.defaultLambda;
 
@@ -84,7 +85,7 @@ export class LambdaProvider {
 
     }
 
-    private _checkLambdaResult(result: InvokeCommandOutput, lambda: string, options: { lambda?: string, params: any }) {
+    private _checkLambdaResult(result: InvokeCommandOutput, lambda: string, options: ILambdaOptions<any>) {
         let statusCode = result.StatusCode || result.$metadata.httpStatusCode;
 
         if (statusCode < 400) {
@@ -97,7 +98,7 @@ export class LambdaProvider {
 
     }
 
-    private _checkLambdaDataResult(data: ILambdaResult<any>, lambda: string, options: { lambda?: string, params: any }) {
+    private _checkLambdaDataResult(data: ILambdaResult<any>, lambda: string, options: ILambdaOptions<any>) {
         let statusCode = data?.statusCode;
 
         if (statusCode < 400) {
