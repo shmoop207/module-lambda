@@ -4,6 +4,9 @@ exports.Lambda = void 0;
 const tslib_1 = require("tslib");
 const inject_1 = require("@appolo/inject");
 let Lambda = class Lambda {
+    constructor() {
+        this._params = {};
+    }
     lambda(lambda) {
         this._lambda = lambda;
         return this;

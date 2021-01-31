@@ -1,5 +1,5 @@
 "use strict";
-import {define, init, inject, singleton, factoryMethod, FactoryFn} from '@appolo/inject';
+import {define, init, inject, singleton, factoryMethod, FactoryFn, Injector} from '@appolo/inject';
 import {ILambdaResult, IOptions, LambdaError} from "../../index";
 import {LambdaClient, InvokeCommand, InvokeCommandOutput} from "@aws-sdk/client-lambda"
 import {Lambda} from "./lambda";
@@ -10,7 +10,8 @@ import {ILambdaErrorParams} from "./errors/lambdaError";
 export class LambdaProvider {
 
     @inject() private moduleOptions: IOptions;
-    @factoryMethod(Lambda) private createLambda: FactoryFn<typeof Lambda>;
+    @inject() private injector: Injector;
+    @factoryMethod(Lambda) private createLambdaFn: FactoryFn<typeof Lambda>;
 
     private lambdaClient: LambdaClient;
 
@@ -27,8 +28,14 @@ export class LambdaProvider {
         });
     }
 
-    public create<T extends { [index: string]: any } = any, K = any>(): Lambda<T, K> {
-        return this.createLambda() as Lambda<T, K>;
+    public create<T extends new (...args: any) => Lambda<P, S>, P, S>(klass: T, ...runtimeArgs: ConstructorParameters<T>): InstanceType<T> {
+        let instance = this.injector.wire(klass, runtimeArgs);
+
+        return instance;
+    }
+
+    public createLambda<T extends { [index: string]: any } = any, K = any>(): Lambda<T, K> {
+        return this.createLambdaFn() as Lambda<T, K>;
     }
 
     public async runAsync<T extends { [index: string]: any }>(options: { lambda?: string, params: T }): Promise<{ status: number, requestId: string }> {

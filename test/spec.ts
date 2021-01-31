@@ -1,5 +1,6 @@
 import {App, createApp} from '@appolo/engine'
-import {LambdaModule, LambdaProvider} from '../index'
+import {define} from '@appolo/inject'
+import {Lambda, LambdaModule, LambdaProvider} from '../index'
 import {Promises} from "@appolo/utils";
 
 let should = require('chai').should();
@@ -30,8 +31,14 @@ describe("Lambda module Spec", function () {
     });
 
     it('should get data', async () => {
+
+        @define()
+        class Test extends Lambda<{type:string, params:{test: number, err: boolean} },{ result: number, type: string, params: { test: number } }>{
+
+        }
+
         let data = await app.injector.get<LambdaProvider>(LambdaProvider)
-            .create<{ type: string, params: { test: number, err: boolean } }, { result: 3, type: string, params: { test: number } }>()
+            .create(Test)
             .params({type: "test", params: {test: 3, err: false}})
             .run()
 

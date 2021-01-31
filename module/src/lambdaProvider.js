@@ -16,8 +16,12 @@ let LambdaProvider = class LambdaProvider {
             region: this.moduleOptions.region,
         });
     }
-    create() {
-        return this.createLambda();
+    create(klass, ...runtimeArgs) {
+        let instance = this.injector.wire(klass, runtimeArgs);
+        return instance;
+    }
+    createLambda() {
+        return this.createLambdaFn();
     }
     async runAsync(options) {
         let lambda = options.lambda || this.moduleOptions.defaultLambda;
@@ -76,8 +80,11 @@ tslib_1.__decorate([
     inject_1.inject()
 ], LambdaProvider.prototype, "moduleOptions", void 0);
 tslib_1.__decorate([
+    inject_1.inject()
+], LambdaProvider.prototype, "injector", void 0);
+tslib_1.__decorate([
     inject_1.factoryMethod(lambda_1.Lambda)
-], LambdaProvider.prototype, "createLambda", void 0);
+], LambdaProvider.prototype, "createLambdaFn", void 0);
 tslib_1.__decorate([
     inject_1.init()
 ], LambdaProvider.prototype, "_initialize", null);
