@@ -77,20 +77,20 @@ let LambdaProvider = class LambdaProvider {
     }
 };
 tslib_1.__decorate([
-    inject_1.inject()
+    (0, inject_1.inject)()
 ], LambdaProvider.prototype, "moduleOptions", void 0);
 tslib_1.__decorate([
-    inject_1.inject()
+    (0, inject_1.inject)()
 ], LambdaProvider.prototype, "injector", void 0);
 tslib_1.__decorate([
-    inject_1.factoryMethod(lambda_1.Lambda)
+    (0, inject_1.factoryMethod)(lambda_1.Lambda)
 ], LambdaProvider.prototype, "createLambdaFn", void 0);
 tslib_1.__decorate([
-    inject_1.init()
+    (0, inject_1.init)()
 ], LambdaProvider.prototype, "_initialize", null);
 LambdaProvider = tslib_1.__decorate([
-    inject_1.define(),
-    inject_1.singleton()
+    (0, inject_1.define)(),
+    (0, inject_1.singleton)()
 ], LambdaProvider);
 exports.LambdaProvider = LambdaProvider;
 //# sourceMappingURL=lambdaProvider.js.map

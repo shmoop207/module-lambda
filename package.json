@@ -1,6 +1,6 @@
 {
   "name": "@appolo/lambda",
-  "version": "8.0.6",
+  "version": "8.0.7",
   "description": "appolo lambda module",
   "keywords": [
     "appolo"
@@ -12,16 +12,15 @@
   "scripts": {},
   "dependencies": {
     "@appolo/engine": "^8.0.22",
-    "@aws-sdk/client-lambda": "^3.4.0"
+    "@aws-sdk/client-lambda": "^3.363.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.14",
-    "@types/lodash": "^4.14.168",
-    "@types/mocha": "^8.2.0",
-    "@types/node": "^14.14.22",
-    "chai": "^4.2.0",
-    "mocha": "^8.2.1",
-    "typescript": "^4.1.3"
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.4.1",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5"
   },
   "repository": {
     "type": "git",

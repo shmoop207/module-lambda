@@ -34,10 +34,10 @@ let Lambda = class Lambda {
     }
 };
 tslib_1.__decorate([
-    inject_1.lazy()
+    (0, inject_1.lazy)()
 ], Lambda.prototype, "lambdaProvider", void 0);
 Lambda = tslib_1.__decorate([
-    inject_1.define()
+    (0, inject_1.define)()
 ], Lambda);
 exports.Lambda = Lambda;
 //# sourceMappingURL=lambda.js.map

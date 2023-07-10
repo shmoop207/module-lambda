@@ -18,7 +18,7 @@ let LambdaModule = LambdaModule_1 = class LambdaModule extends engine_1.Module {
     }
 };
 LambdaModule = LambdaModule_1 = tslib_1.__decorate([
-    engine_1.module()
+    (0, engine_1.module)()
 ], LambdaModule);
 exports.LambdaModule = LambdaModule;
 //# sourceMappingURL=lambdaModule.js.map

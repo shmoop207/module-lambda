@@ -8,7 +8,7 @@ let should = require('chai').should();
 describe("Lambda module Spec", function () {
     let app;
     beforeEach(async () => {
-        app = engine_1.createApp({ root: process.cwd() + '/test/mock/', environment: "production" });
+        app = (0, engine_1.createApp)({ root: process.cwd() + '/test/mock/', environment: "production" });
         app.module.use(index_1.LambdaModule.for({
             "region": process.env.region,
             "accessKeyId": process.env.accessKeyId,
@@ -24,7 +24,7 @@ describe("Lambda module Spec", function () {
         let Test = class Test extends index_1.Lambda {
         };
         Test = tslib_1.__decorate([
-            inject_1.define()
+            (0, inject_1.define)()
         ], Test);
         let data = await app.injector.get(index_1.LambdaProvider)
             .create(Test)
